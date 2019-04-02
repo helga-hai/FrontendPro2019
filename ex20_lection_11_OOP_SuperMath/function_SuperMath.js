@@ -15,11 +15,11 @@
 SuperMath.prototype.factory = function(zn){
 	let obj = this;
 	let listMath = {
-		'/': function(){ return obj.x / obj.y },
-		'*': function(){ return obj.x * obj.y },
-		'-': function(){ return obj.x - obj.y },
-		'%': function(){ return obj.x % obj.y },
-		'+': function(){ return obj.x + obj.y }
+		'/': ()=> obj.x / obj.y,
+		'*': ()=> obj.x * obj.y,
+		'-': ()=> obj.x - obj.y,
+		'%': ()=> obj.x % obj.y,
+		'+': ()=> +obj.x + +obj.y
 	}
 	
 	return listMath[zn]()
@@ -29,33 +29,34 @@ SuperMath.prototype.factory = function(zn){
 
 function SuperMath() {
 
-	this.x = +doPrompt('x');
-	this.y = +doPrompt('y');
+	this.x = doPrompt('x');
+	this.y = doPrompt('y');
 	this.znak = doPrompt('znak');
 
 	function doPrompt(str){
-		do { var w = prompt(str)
+		let w;
+		do { w = prompt(str)
 		} while( str.localeCompare("znak") === 0 ? 
 			![ '/', '+', '-', '*', '%' ].includes(w) : 
-			isNaN(w)==true )
+			isNaN(w)==true || !!!w )
 
 		return w
 	};
 
-	this.input = function(){
-		this.x = +doPrompt('x');
-		this.y = +doPrompt('y');
+	this.input = ()=> {
+		this.x = doPrompt('x');
+		this.y = doPrompt('y');
 		this.znak = doPrompt('znak');
 		this.factory(this.znak)
 	};
 
-	this.check = function(){
+	this.check = ()=> {
 		return confirm("yes or no") ? alert( this.factory(this.znak) ) : this.input();
 	}
 
 }
 
 
-var p = new SuperMath();
+let p = new SuperMath();
 p.check();
 console.dir(p)
