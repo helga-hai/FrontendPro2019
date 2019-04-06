@@ -13,13 +13,6 @@ window.onload = function() {
 	let last = document.querySelector('input[name=last]');
 	let textarea = document.querySelector('textarea');
 
-
-	setInterval( ()=>{
-	textarea.setAttribute('placeholder', first.value +  ',' + middle.value +  ',' + last.value)
-	}, 1000)
-
-//-------------------------------------------------------------
-
 	setInterval( ()=>{
 	textarea.innerHTML = (first.value +  ',' + middle.value +  ',' + last.value)
 	}, 500)
