@@ -11,7 +11,7 @@ body{
 	border-radius:15px;
 	opacity:.6;
 	position:absolute;
-	transition: all .2s linear;
+	transition: all .1s linear;
 }
 .green {
 	background-color:#00FF00;	/*(0,255,0)*/
@@ -25,5 +25,5 @@ body{
 	border-radius:15px;
 	opacity:.6;
 	position:absolute;
-	transition: all .2s linear;
+	transition: all .3s linear;
 }
