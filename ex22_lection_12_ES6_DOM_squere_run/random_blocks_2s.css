@@ -1,24 +1,29 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
 body{
 	position:relative;
 }
 .red {
 	background-color:#FF0000;	/*(255,0,0)*/
-	width:80px;
-	height:80px;
+	border-radius:15px;
+	opacity:.6;
 	position:absolute;
 	transition: all .2s linear;
 }
 .green {
 	background-color:#00FF00;	/*(0,255,0)*/
-	width:80px;
-	height:80px;
+	border-radius:15px;
+	opacity:.6;
 	position:absolute;
 	transition: all .2s linear;
 }
 .blue {
 	background-color:#0000FF;   /*(0,0,255)*/
-	width:80px;
-	height:80px;
+	border-radius:15px;
+	opacity:.6;
 	position:absolute;
 	transition: all .2s linear;
 }
