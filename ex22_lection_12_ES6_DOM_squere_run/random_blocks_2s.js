@@ -22,7 +22,7 @@ for (let i=0; i<SIDES.length; i++) {
 	SIDES[i][0] = parseInt(divs[i].style.height);
 	SIDES[i][1] = parseInt(divs[i].style.width);
 	position[i] = new Array(2);
-}
+} // SIDES  [ [height,width], [height,width], [height,width] ]
 
 function count(){
 	let top, left;
@@ -32,7 +32,7 @@ function count(){
 		divs[i].style.top = position[i][0] + 'px';
 		divs[i].style.left = position[i][1] + 'px';
 		divs[i].style.backgroundColor = 'rgb(' + getRandColor() + ',' + getRandColor() + ',' + getRandColor() + ')';
-	} // [ [top,left], [top,left], [top,left] ]
+	} // position [ [top,left], [top,left], [top,left] ]
 
 	function getRandColor(){
 		return Math.floor(Math.random()*255)
