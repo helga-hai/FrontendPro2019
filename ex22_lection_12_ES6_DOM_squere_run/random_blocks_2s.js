@@ -16,7 +16,6 @@ let divs = document.querySelectorAll('div'); // [div.red, div.green, div,blue]
 
 const SIDES = new Array(divs.length);
 let position = new Array(divs.length);
-let top, left;
 
 for (let i=0; i<SIDES.length; i++) {
 	SIDES[i] = new Array(2);
@@ -26,6 +25,7 @@ for (let i=0; i<SIDES.length; i++) {
 }
 
 function count(){
+	let top, left;
 	for (let i=0; i<SIDES.length; i++) {
 		position[i][0] = Math.floor(Math.random() * (PARAMS[0] - SIDES[i][0]));
 		position[i][1] = Math.floor(Math.random() * (PARAMS[1] - SIDES[i][1]));
