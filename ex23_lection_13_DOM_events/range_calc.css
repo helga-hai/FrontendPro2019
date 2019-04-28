@@ -1,0 +1,33 @@
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+body {
+    padding: 34px;
+}
+
+.level {
+    width: 22px;
+    height: 100px;
+    background: #fff;
+    border: 1px solid #cecece;
+    position: relative;
+}
+span.bar {
+	width:20px;
+	position: absolute;
+	bottom:0;
+	background-color: #00a651;
+	transition: all .1s linear;
+	z-index:2;
+}
+span.comission {
+	width:20px;
+	position: absolute;
+	bottom:0;
+	background-color: red;
+    transition: all .1s linear;
+    z-index:1;
+}
+
