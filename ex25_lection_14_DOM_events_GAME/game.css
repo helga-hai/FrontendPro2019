@@ -1,0 +1,50 @@
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+body {
+	background:black;
+}
+.wrap {
+	position:relative;
+	width:100vw;
+	height:100vh;
+}
+.man {
+	position:absolute;
+	bottom:0;
+	left:0;
+    background: #FFEB3B;
+    transition: .3s;
+    border-radius: 50%;
+}
+@keyframes mouthup {
+	0%   {
+		transform: scale3d(1,1,1);
+	}
+	100% {
+		transform: scale3d(1,.2,1);
+    }
+}
+.man:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    right: 33px;
+    top: 18px;
+    background: black;
+    width: 15px;
+    height: 15px;
+}
+.man:after {
+    content: "";
+    position: absolute;
+    border-top: 30px solid transparent;
+    border-right: 60px solid black;
+    border-bottom: 30px solid transparent;
+    right: -11px;
+    top: 22px;
+    transition: .4s;
+    animation: mouthup .5s linear infinite alternate ;
+}
