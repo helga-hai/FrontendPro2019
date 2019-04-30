@@ -3,6 +3,9 @@
 	padding:0;
 	box-sizing:border-box;
 }
+li {
+    list-style:none;
+}
 body {
 	background:black;
 }
@@ -10,6 +13,7 @@ body {
 	position:relative;
 	width:100vw;
 	height:100vh;
+    overflow: hidden;
 }
 .man {
 	position:absolute;
@@ -48,3 +52,4 @@ body {
     transition: .4s;
     animation: mouthup .5s linear infinite alternate ;
 }
+/******** contextmenu ********/

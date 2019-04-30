@@ -8,37 +8,10 @@
 //Персонаж - это квадрат, имеющий размеры 100 на 100 пикселей.
 //Прыжок - это анимация движения объекта вверх на `h` пикселей и возврат в изначальное положение (до прыжка)
 
-/*window.onload = function() {
-
-	let man = document.querySelector('.man');
-	let state = {
-		h:200,
-		step:20,
-		left:0,
-		bottom:0
-	}
-		
-	document.addEventListener('keydown', function(ev){
-		if (ev.keyCode == 32)
-			man.style.bottom = state.bottom + state.h + "px"
-		if (ev.keyCode == 39){
-			man.style.left = state.left + state.step + "px";
-			state.left = parseInt(man.style.left);
-		}
-		if (ev.keyCode == 37){
-			man.style.left = state.left - state.step + "px";
-			state.left = parseInt(man.style.left);
-		}
-		console.log(ev.keyCode)
-		console.log(state)
-	})
-	document.addEventListener('keyup', function(ev){
-		man.style.bottom = state.bottom + "px"
-	})
-}// or  */
-
 
 window.onload = function() {
+	const WW = document.documentElement.clientWidth
+	const WH = document.documentElement.clientHeight
 
 	let man = document.querySelector('.man');
 	let state = {
@@ -83,6 +56,73 @@ window.onload = function() {
 	document.addEventListener('keyup', function(ev){
 		if (ev.keyCode == 32)
 			man.style.bottom = state.bottom + "px";
+
+	});
+
+	function doJump() {
+		man.style.bottom = state.bottom + state.h + "px"
+		setTimeout(()=>{man.style.bottom = state.bottom + "px"}, 300)
+	}
+	function doRemove() {
+		man.style.width = "0"
+		man.style.height = "0"
+	}
+	function doChangeColor() {
+		function color() {
+			return Math.floor(Math.random()*256)
+		}
+		man.style.background = `rgb( ${color()}, ${color()}, ${color()})`
+	}
+
+
+	let targetList = document.createElement('ul');
+	var list = [
+	  {'title':'<a style="cursor:pointer">Jump</a>', 'action': doJump},
+	  {'title':'<a style="cursor:pointer">Remove</a>', 'action': doRemove},
+	  {'title':'<a style="cursor:pointer">ChangeColor</a>', 'action': doChangeColor}
+	 ]
+	for(let i = 0; i < list.length; i++){
+		let li = document.createElement('li');
+		for(var key in list[i]){
+			if(key == 'title')
+				li.innerHTML = list[i][key];
+			else if (key == 'action')
+				li.onclick = list[i][key]
+		}
+		targetList.appendChild(li);
+	}
+
+	document.addEventListener('contextmenu', function(ev){
+		ev.preventDefault()
+		document
+			.querySelector('.wrap')
+			.appendChild(targetList);
+
+		targetList.style.cssText = `
+		position: absolute; 
+		background: aliceblue; 
+		display: inline-block;
+		padding: 6px;`
+		function menuPosition(coord) {
+			if(coord == 'x'){
+				if (ev.clientX > WW - targetList.offsetWidth)
+					return ev.clientX - targetList.offsetWidth
+				else
+					return ev.clientX
+			}
+			else {
+				if (ev.clientY > WH - targetList.offsetHeight)
+					return ev.clientY - targetList.offsetHeight
+				else
+					return ev.clientY				
+			}
+		}
+		targetList.style.left = menuPosition('x')  + "px";
+		targetList.style.top = menuPosition('y')  + "px";
+
+	});
+	document.addEventListener('click', function(ev){
+		targetList.style.display="none";
 
 	});
 }
