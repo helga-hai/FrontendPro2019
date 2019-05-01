@@ -18,46 +18,56 @@ window.onload = function() {
 		h:200,
 		step:50,
 		left:0,
-		bottom:0
+		bottom:0,
 	}
 
+	function jump(ctrl) {
+		if (!ctrl) 
+			man.style.bottom = state.bottom + state.h + "px";
+		else
+			man.classList.add('distort');		
+	}
+	document.addEventListener('keyup', function(ev){
+		if (ev.keyCode == 32){ //space 
+			man.style.bottom = state.bottom + "px";
+		}
+		if (ev.keyCode == 17){ //ctrl
+			man.classList.remove('distort');
+		}
+	});
+	function goLeftRight(str) {
+		if (str == 'left') {
+			man.style.left = state.left - state.step + 'px';
+			state.left = parseInt(man.style.left)
+		} else if (str == 'right') {
+			man.style.left = state.left + state.step + 'px';
+			state.left = parseInt(man.style.left)
+		}
+		
+	}
+	function goUpDown(str, ctrl) {
+		if (!ctrl) {
+			if (str == 'up') {
+	   			man.style.bottom = state.bottom + state.step + "px";
+				state.bottom = parseInt(man.style.bottom);
+			} else if (str == 'down') {
+	   			man.style.bottom = state.bottom - state.step + "px";
+				state.bottom = parseInt(man.style.bottom);
+			} 
+
+		}
+	}
 	function universalMove(ev){
 		switch(ev.keyCode){
-		   case 32: //space
-		   			man.style.bottom = state.bottom + state.h + "px"; 
-					break;
-		   case 39: //right
-		   			man.style.left = state.left + state.step + "px";
-					state.left = parseInt(man.style.left);
-					man.style.transform = 'rotate(0deg)';
-					break;
-		   case 37: //left
-		   			man.style.left = state.left - state.step + "px";
-					state.left = parseInt(man.style.left);
-					man.style.transform = (man.style.transform == 'rotate(90deg)'||'rotate(-180deg)') ? 'rotate(180deg)' : 'rotate(-180deg)';
-					console.log(ev.keyCode, state);break;
-		   case 38: //top
-		   			man.style.bottom = state.bottom + state.step + "px";
-					state.bottom = parseInt(man.style.bottom);
-					man.style.transform = (man.style.transform == 'rotate(180deg)'||'rotate(270deg)') ? 'rotate(270deg)' : 'rotate(-90deg)';
-					break;
-		   case 40: //down
-		   			man.style.bottom = state.bottom - state.step + "px";
-					state.bottom = parseInt(man.style.bottom);
-					man.style.transform = (man.style.transform == 'rotate(-180deg)') ? 'rotate(270deg)' : 'rotate(90deg)';
-					break;
-		   case 17: //ctrl  
-		   			man.style.transform = (man.style.transform.indexOf('scale3d(1.4, 0.75, 1)') == -1) ? man.style.transform + 'scale3d(1.4, 0.75, 1)': '';
-		   			break;
+		    case 32: jump(ev.ctrlKey); break; //space  
+		    case 39: goLeftRight('right'); console.log(state); break; //right
+		    case 37: goLeftRight('left'); console.log(state); break; //left	
+			case 38: goUpDown('up', ev.ctrlKey); break; //top
+			case 40: goUpDown('down', ev.ctrlKey); break; //down
+			case 17: jump(ev.ctrlKey); break; //ctrl  			
 		}
-
 	}
 	document.addEventListener('keydown', universalMove)
-	document.addEventListener('keyup', function(ev){
-		if (ev.keyCode == 32)
-			man.style.bottom = state.bottom + "px";
-
-	});
 
 	function doJump() {
 		man.style.bottom = state.bottom + state.h + "px"
