@@ -22,14 +22,20 @@ window.onload = function() {
 	}
 
 	function jump(ctrl) {
-		if (!ctrl) 
-			man.style.bottom = state.bottom + state.h + "px";
-		else
-			man.classList.add('distort');		
+		if (!ctrl) {
+			man.style.bottom = state.bottom + state.h + 'px';
+		}
+		else if (ctrl) {
+			if (ctrl.type == 'click'){
+				man.style.bottom = state.bottom + state.h + 'px'
+				setTimeout(()=>{man.style.bottom = state.bottom + 'px'}, 300)
+			}
+			else man.classList.add('distort');
+		}
 	}
 	document.addEventListener('keyup', function(ev){
 		if (ev.keyCode == 32){ //space 
-			man.style.bottom = state.bottom + "px";
+			man.style.bottom = state.bottom + 'px';
 		}
 		if (ev.keyCode == 17){ //ctrl
 			man.classList.remove('distort');
@@ -48,10 +54,10 @@ window.onload = function() {
 	function goUpDown(str, ctrl) {
 		if (!ctrl) {
 			if (str == 'up') {
-	   			man.style.bottom = state.bottom + state.step + "px";
+	   			man.style.bottom = state.bottom + state.step + 'px';
 				state.bottom = parseInt(man.style.bottom);
 			} else if (str == 'down') {
-	   			man.style.bottom = state.bottom - state.step + "px";
+	   			man.style.bottom = state.bottom - state.step + 'px';
 				state.bottom = parseInt(man.style.bottom);
 			} 
 
@@ -60,8 +66,8 @@ window.onload = function() {
 	function universalMove(ev){
 		switch(ev.keyCode){
 		    case 32: jump(ev.ctrlKey); break; //space  
-		    case 39: goLeftRight('right'); console.log(state); break; //right
-		    case 37: goLeftRight('left'); console.log(state); break; //left	
+		    case 39: goLeftRight('right'); break; //right
+		    case 37: goLeftRight('left'); break; //left	
 			case 38: goUpDown('up', ev.ctrlKey); break; //top
 			case 40: goUpDown('down', ev.ctrlKey); break; //down
 			case 17: jump(ev.ctrlKey); break; //ctrl  			
@@ -69,13 +75,13 @@ window.onload = function() {
 	}
 	document.addEventListener('keydown', universalMove)
 
-	function doJump() {
+	/*function doJump() {
 		man.style.bottom = state.bottom + state.h + "px"
 		setTimeout(()=>{man.style.bottom = state.bottom + "px"}, 300)
-	}
+	}*/
 	function doRemove() {
-		man.style.width = "0"
-		man.style.height = "0"
+		man.style.width = '0'
+		man.style.height = '0'
 	}
 	function doChangeColor() {
 		function color() {
@@ -87,7 +93,7 @@ window.onload = function() {
 
 	let targetList = document.createElement('ul');
 	var list = [
-	  {'title':'<a style="cursor:pointer">Jump</a>', 'action': doJump},
+	  {'title':'<a style="cursor:pointer">Jump</a>', 'action': jump},
 	  {'title':'<a style="cursor:pointer">Remove</a>', 'action': doRemove},
 	  {'title':'<a style="cursor:pointer">ChangeColor</a>', 'action': doChangeColor}
 	 ]
@@ -127,12 +133,11 @@ window.onload = function() {
 					return ev.clientY				
 			}
 		}
-		targetList.style.left = menuPosition('x')  + "px";
-		targetList.style.top = menuPosition('y')  + "px";
+		targetList.style.left = menuPosition('x')  + 'px';
+		targetList.style.top = menuPosition('y')  + 'px';
 
 	});
 	document.addEventListener('click', function(ev){
 		targetList.style.display="none";
-
 	});
 }

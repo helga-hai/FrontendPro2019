@@ -56,4 +56,10 @@ body {
     width:140px !important;
     height:75px !important;
 }
-/******** contextmenu ********/
+.distort:after {
+    content: "";
+    position: absolute;
+    right: -11px;
+    top: 22px;
+    border:none;
+}
