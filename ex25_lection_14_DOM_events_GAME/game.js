@@ -89,36 +89,38 @@ window.onload = function() {
 		}
 		man.style.background = `rgb( ${color()}, ${color()}, ${color()})`
 	}
-
-
-	let targetList = document.createElement('ul');
-	var list = [
-	  {'title':'<a style="cursor:pointer">Jump</a>', 'action': jump},
-	  {'title':'<a style="cursor:pointer">Remove</a>', 'action': doRemove},
-	  {'title':'<a style="cursor:pointer">ChangeColor</a>', 'action': doChangeColor}
-	 ]
-	for(let i = 0; i < list.length; i++){
-		let li = document.createElement('li');
-		for(var key in list[i]){
-			if(key == 'title')
-				li.innerHTML = list[i][key];
-			else if (key == 'action')
-				li.onclick = list[i][key]
-		}
-		targetList.appendChild(li);
-	}
-
+	var targetList
 	document.addEventListener('contextmenu', function(ev){
 		ev.preventDefault()
+		if (!!!targetList) {
+			targetList = document.createElement('ul');
+			targetList.style.cssText = `
+			position: absolute; 
+			background: aliceblue; 
+			display: inline-block;
+			padding: 6px;
+			z-index:100`
+			var list = [
+			  {'title':'<a style="cursor:pointer">Jump</a>', 'action': jump},
+			  {'title':'<a style="cursor:pointer">Remove</a>', 'action': doRemove},
+			  {'title':'<a style="cursor:pointer">ChangeColor</a>', 'action': doChangeColor}
+			 ]
+			for(let i = 0; i < list.length; i++){
+				let li = document.createElement('li');
+				for(var key in list[i]){
+					if(key == 'title')
+						li.innerHTML = list[i][key];
+					else if (key == 'action')
+						li.onclick = list[i][key]
+				}
+				targetList.appendChild(li);
+			}
+		} else targetList.style.display = 'inline-block';
+		
 		document
 			.querySelector('.wrap')
 			.appendChild(targetList);
 
-		targetList.style.cssText = `
-		position: absolute; 
-		background: aliceblue; 
-		display: inline-block;
-		padding: 6px;`
 		function menuPosition(coord) {
 			if(coord == 'x'){
 				if (ev.clientX > WW - targetList.offsetWidth)
@@ -140,4 +142,5 @@ window.onload = function() {
 	document.addEventListener('click', function(ev){
 		targetList.style.display="none";
 	});
+
 }

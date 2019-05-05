@@ -22,6 +22,7 @@ body {
     background: #FFEB3B;
     transition: .3s;
     border-radius: 50%;
+    z-index:1;
 }
 @keyframes mouthup {
 	0%   {
@@ -50,7 +51,7 @@ body {
     right: -11px;
     top: 22px;
     transition: .4s;
-    animation: mouthup .5s linear infinite alternate ;
+    animation: mouthup .5s linear infinite alternate;
 }
 .distort {
     width:140px !important;
@@ -62,4 +63,11 @@ body {
     right: -11px;
     top: 22px;
     border:none;
+}
+/****** octopus ********/
+.octopus {
+    width: 100px;
+    position:absolute;
+    transition: .7s;
+    z-index:2;
 }
