@@ -1,0 +1,44 @@
+* {
+	margin:0;
+	box-sizing:border-box;
+}
+.invalid {
+    border-color: chocolate;
+    background: #d2691e7a;
+}
+label {
+    width: 50px;
+    display: inline-block;
+}
+
+.formItem {
+    display: block;
+    width: 300px;
+    padding: 7px 0;
+    position:relative;
+}
+.note-text {
+    position: absolute;
+    line-height: 14px;
+    font-size: 16px;
+    background: #e8e8e8;
+    padding: 7px 12px;
+    color: chocolate;
+    border-radius: 3px;
+    box-shadow: rgb(204, 204, 204) 2px 1px 2px;
+    /* display: none; */
+    left: 235px;
+    width: 144px;
+    top: 2px;
+}
+.note-text:before {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 8px 0;
+    border-color: transparent #e8e8e8 transparent transparent;
+    content: '';
+    top: 6px;
+    left: -7px;
+    position: absolute;
+}
