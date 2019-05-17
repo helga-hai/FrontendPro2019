@@ -6,14 +6,13 @@
 //["1234hello", "hellohd;lfmg", "45yu89egrhellowegojih", "dfhghello", ",bnsdklb"]
 //результат: "4, 0, 9, 4"
 
-window.onload = function(){
-	var list = ["1234hello", "hellohd;lfmg", "45yu89egrhellowegojih", "dfhghello", ",bnsdklb"];
-	var match ="hello";
 
-	let res = list
-		.map(item => item.indexOf(match))
-		.filter(item => item >= 0)
-		.join(', ')
-	
-	console.log(res)
-}
+var list = ["1234hello", "hellohd;lfmg", "45yu89egrhellowegojih", "dfhghello", ",bnsdklb"];
+var match ="hello";
+
+let res = list
+	.map(item => item.indexOf(match))
+	.filter(item => item >= 0)
+	.join(', ')
+
+console.log(res)
