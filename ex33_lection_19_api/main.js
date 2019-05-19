@@ -66,46 +66,63 @@ function pluck(array, str){
  return tableList
 }
 
-var ajaxQuery;
+
 function getObject(url){
- ajaxQuery = new Promise(function(resolve, reject){
-     let xhr = new XMLHttpRequest();
 
-     xhr.addEventListener('readystatechange', function(){
-         if (xhr.readyState != 4) return;
-         if (xhr.status != 200)
-             reject(xhr.statusText)
-         else
-             resolve([JSON.parse(xhr.responseText), url]);
-     })
+	return new Promise(function(resolve, reject){
 
-     xhr.open('GET', url, true);
-     xhr.send();
- })
+		if (url=="https://api.github.com/orgs/hillel-front-end") {console.log("1")}
+		if (url=="https://api.github.com/orgs/hillel-front-end/repos") {console.log("2")}
+
+	     let xhr = new XMLHttpRequest();
+
+	     xhr.addEventListener('readystatechange', function(){
+	         if (xhr.readyState != 4) return;
+	         if (xhr.status != 200)
+	             reject(xhr.statusText)
+	         else {
+	             resolve(JSON.parse(xhr.responseText));
+			 }
+	     })
+
+	     xhr.open('GET', url, true);
+	     xhr.send();
+
+	})
 }
-getObject('https://api.github.com/orgs/hillel-front-end')
+
+var ajaxQuery = getObject('https://api.github.com/orgs/hillel-front-end');
 
 ajaxQuery.then(
-     gitInfo => {
+    gitStart => getObject(gitStart['repos_url']),
+    error => console.log(error + ' 1')
+ ).then(
+    gitAll => gitAll.forEach(item=>tableList.push(new FormInfo(item))),
+    error => console.log(error + ' 2')
+ );
 
-		if (gitInfo[gitInfo.length-1] === "https://api.github.com/orgs/hillel-front-end") {
-			for (let key in gitInfo[0]) {
-				if ( key === 'repos_url' ) {
-				tableList.push(gitInfo[0][key])
-				console.log(gitInfo[0][key])
-				getObject(gitInfo[0][key])
-				}
-			}
-		}
+function FormInfo(obj){
+	for(key in obj){
+		this.name = obj['name'];
+		this['default_branch'] = obj['default_branch'];
+		this['updated_at'] = obj['updated_at'];
+		console.log(obj['name'])
+	}
+}
 
-		if (gitInfo[gitInfo.length-1] === "https://api.github.com/orgs/hillel-front-end/repos") {
-			pluck(gitInfo[0], 'name');
-			console.log(tableList)
-		};
-      console.log('RESOLVED', tableList)
+
+/*ajaxQueryDetail.then(
+    gitStart => {gitStart.forEach(item=>FormInfo(item))},
+    error => console.log(error + ' 1')
+ ).then(
+    gitAll => {
+		console.log('gitAll='+gitAll)
      },
-     error => console.log(error + ' 1')
- )
+    error => console.log(error + ' 2')
+ )*/
 
+			//debugger
+//setTimeout(console.log('end', tableList),4000)
+//console.log(listAll)
+setTimeout(()=>{console.dir(tableList)},4000)
 
-console.log('end', tableList)
