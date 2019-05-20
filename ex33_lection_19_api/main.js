@@ -71,8 +71,8 @@ function getObject(url){
 
 	return new Promise(function(resolve, reject){
 
-		if (url=="https://api.github.com/orgs/hillel-front-end") {console.log("1")}
-		if (url=="https://api.github.com/orgs/hillel-front-end/repos") {console.log("2")}
+		//if (url=="https://api.github.com/orgs/hillel-front-end") {console.log("1")}
+		//if (url=="https://api.github.com/orgs/hillel-front-end/repos") {console.log("2")}
 
 	     let xhr = new XMLHttpRequest();
 
@@ -102,12 +102,26 @@ ajaxQuery.then(
  );
 
 function FormInfo(obj){
+	//let langUrl
+	function getLanguages(link){
+		let res=[];
+		getObject(link)
+			.then(langObj=>{
+					for(key in langObj){
+						res.push(key);
+					}
+				},
+				error => console.log(error+' lang')
+			);
+		return res;
+	}
 	for(key in obj){
 		this.name = obj['name'];
 		this['default_branch'] = obj['default_branch'];
 		this['updated_at'] = obj['updated_at'];
 		//console.log(obj['name'])
-		//this['languages_url'] = obj['languages_url']
+		this['languages_url'] = getLanguages(obj['languages_url']);
+		//langUrl = obj['languages_url'];
 	}
 }
 
