@@ -95,10 +95,10 @@ var ajaxQuery = getObject('https://api.github.com/orgs/hillel-front-end');
 
 ajaxQuery.then(
     gitStart => getObject(gitStart['repos_url']),
-    error => console.log(error + ' 1')
+    error => Promise.reject()
  ).then(
     gitAll => gitAll.forEach(item=>tableList.push(new FormInfo(item))),
-    error => console.log(error + ' 2')
+    error => console.log(error+' ER')
  );
 
 function FormInfo(obj){
@@ -106,7 +106,8 @@ function FormInfo(obj){
 		this.name = obj['name'];
 		this['default_branch'] = obj['default_branch'];
 		this['updated_at'] = obj['updated_at'];
-		console.log(obj['name'])
+		//console.log(obj['name'])
+		//this['languages_url'] = obj['languages_url']
 	}
 }
 
