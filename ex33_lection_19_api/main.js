@@ -107,13 +107,15 @@ function FormInfo(obj){
 		let res=[];
 		getObject(link)
 			.then(langObj=>{
-					for(key in langObj){
+			//console.log(langObj)
+					for(let key in langObj){
 						res.push(key);
-					}
+					};
+					return res;
 				},
 				error => console.log(error+' lang')
 			);
-		return res;
+		//return res;
 	}
 	for(key in obj){
 		this.name = obj['name'];
