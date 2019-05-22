@@ -48,6 +48,8 @@ console.log(getProducts(products))*/
 repos_url -> default_branch
 repos_url -> updated_at
 */
+import { tableList } from '/Api.js';
+
 function concatTable(list){
  let curentTable = `<table>${list.map(item => `<tr><td>${item}</td></tr>`).join('')}</table>`;
  //delete list;
@@ -66,80 +68,4 @@ function pluck(array, str){
  return tableList
 }
 
-
-function getObject(url){
-
-	return new Promise(function(resolve, reject){
-
-		//if (url=="https://api.github.com/orgs/hillel-front-end") {console.log("1")}
-		//if (url=="https://api.github.com/orgs/hillel-front-end/repos") {console.log("2")}
-
-	     let xhr = new XMLHttpRequest();
-
-	     xhr.addEventListener('readystatechange', function(){
-	         if (xhr.readyState != 4) return;
-	         if (xhr.status != 200)
-	             reject(xhr.statusText)
-	         else {
-	             resolve(JSON.parse(xhr.responseText));
-			 }
-	     })
-
-	     xhr.open('GET', url, true);
-	     xhr.send();
-
-	})
-}
-
-var ajaxQuery = getObject('https://api.github.com/orgs/hillel-front-end');
-
-ajaxQuery.then(
-    gitStart => getObject(gitStart['repos_url']),
-    error => Promise.reject()
- ).then(
-    gitAll => gitAll.forEach(item=>tableList.push(new FormInfo(item))),
-    error => console.log(error+' ER')
- );
-
-function FormInfo(obj){
-	//let langUrl
-	function getLanguages(link){
-		let res=[];
-		getObject(link)
-			.then(langObj=>{
-			//console.log(langObj)
-					for(let key in langObj){
-						res.push(key);
-					};
-					return res;
-				},
-				error => console.log(error+' lang')
-			);
-		//return res;
-	}
-	for(key in obj){
-		this.name = obj['name'];
-		this['default_branch'] = obj['default_branch'];
-		this['updated_at'] = obj['updated_at'];
-		//console.log(obj['name'])
-		this['languages_url'] = getLanguages(obj['languages_url']);
-		//langUrl = obj['languages_url'];
-	}
-}
-
-
-/*ajaxQueryDetail.then(
-    gitStart => {gitStart.forEach(item=>FormInfo(item))},
-    error => console.log(error + ' 1')
- ).then(
-    gitAll => {
-		console.log('gitAll='+gitAll)
-     },
-    error => console.log(error + ' 2')
- )*/
-
-			//debugger
-//setTimeout(console.log('end', tableList),4000)
-//console.log(listAll)
-setTimeout(()=>{console.dir(tableList)},4000)
 

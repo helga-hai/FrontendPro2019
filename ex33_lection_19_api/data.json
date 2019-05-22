@@ -3,7 +3,7 @@
   "id": 34546304,
   "node_id": "MDEyOk9yZ2FuaXphdGlvbjM0NTQ2MzA0",
   "url": "https://api.github.com/orgs/hillel-front-end",
-  "repos_url": "https://api.github.com/orgs/hillel-front-end/repos",
+  "repos_url": "data2.json",
   "events_url": "https://api.github.com/orgs/hillel-front-end/events",
   "hooks_url": "https://api.github.com/orgs/hillel-front-end/hooks",
   "issues_url": "https://api.github.com/orgs/hillel-front-end/issues",
