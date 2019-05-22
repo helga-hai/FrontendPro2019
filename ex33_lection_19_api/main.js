@@ -56,16 +56,20 @@ function concatTable(list){
  return curentTable
 }
 
-var tableList = [];
+
 function pluck(array, str){
- array.forEach( (tmpObj)=>{
-     for(let key in tmpObj) {
-      if(key == str) {
-       tableList.push(tmpObj[key])
-      }
-     }
- });
+	array.forEach( (tmpObj)=>{
+		for(let key in tmpObj) {
+			if(key == str)
+				tableList.push(tmpObj[key])
+		}
+	});
  return tableList
 }
 
-
+/*
+default_branch: "master"
+languages_url: (3) ["JavaScript", "HTML", "CSS"]
+name: "front-end-pro-2018"
+updated_at: "2018-07-02T12:57:45Z"
+*/

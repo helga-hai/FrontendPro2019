@@ -1,3 +1,5 @@
+var tableList = [];
+
 function getObject(url){
 
 	return new Promise(function(resolve, reject){
@@ -28,7 +30,7 @@ ajaxQuery.then(
  )
 
 function FormInfo(obj){
-
+	
 	for(key in obj){
 		this.name = obj['name'];
 		this['default_branch'] = obj['default_branch'];
