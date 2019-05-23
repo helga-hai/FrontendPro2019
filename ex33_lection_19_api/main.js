@@ -47,8 +47,10 @@ console.log(getProducts(products))*/
 /*repos_url -> name
 repos_url -> default_branch
 repos_url -> updated_at
-*/
-import { tableList } from '/Api.js';
+*/setTimeout(()=>{
+	console.dir(tableList);
+	},4000)
+import data from './Api.js';
 
 function concatTable(list){
  let curentTable = `<table>${list.map(item => `<tr><td>${item}</td></tr>`).join('')}</table>`;
@@ -66,7 +68,7 @@ function pluck(array, str){
 	});
  return tableList
 }
-
+console.log(data)
 /*
 default_branch: "master"
 languages_url: (3) ["JavaScript", "HTML", "CSS"]

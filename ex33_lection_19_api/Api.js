@@ -14,12 +14,12 @@ function getObject(url){
 	             resolve(JSON.parse(xhr.responseText));
 			 }
 	     })
-	     xhr.open('GET', url, true);
+	     xhr.open('POST', url, true);
 	     xhr.send();
 	})
 }
 
-var ajaxQuery = getObject('https://api.github.com/orgs/hillel-front-end');
+var ajaxQuery = getObject('./data.json')//getObject('https://api.github.com/orgs/hillel-front-end');
 
 ajaxQuery.then(
     gitStart => getObject(gitStart['repos_url']),
@@ -51,9 +51,9 @@ function FormInfo(obj){
 	}
 }
 
+	export default tableList
 
 setTimeout(()=>{
 	console.dir(tableList);
-	export tableList
 	},4000)
 
