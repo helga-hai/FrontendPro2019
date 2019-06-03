@@ -8,7 +8,7 @@ function FormInfo(obj){
 		this['languages_url'] = obj['languages_url'];
 	}
 }
-var query = new Promise(
+var query1 = new Promise(
 	function(resolve,reject){
 
 		fetch('./data3.json')
@@ -24,19 +24,20 @@ var query = new Promise(
 		resolve(tableList)
 	}
 )
-//query.then(res => console.log(res))
-export default query
+query1.then(res => console.log(res))
+export default query1
 
 function createLangList(){
+
 	Promise.all(listPromise)
 		.then(responses => 
 				Promise.all(responses.map(item => item.json() ) )
 			)
 			.then(responses => {
-				new Promise((resolve,reject) => responses.forEach((item, pos) => 
-					tableList[pos]['languages_url']=Object.keys(item) ))
-				.then(res=> console.log(res),er=>console.log(er))
+				responses.forEach((item, pos) => 
+						tableList[pos]['languages_url']=Object.keys(item) )
 			})
-			//.then(res => {return tableList})
+			//.then( response => console.log(tableList))
+
 	.catch(er => console.log(er))
 }
