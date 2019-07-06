@@ -39,5 +39,5 @@ class DogES6 extends AnimalES6 {
 		this.bark = () => `Dog ${dogname} is barking`
 	}
 }
-var dogES6 = new DogES6('Bobik')
+let dogES6 = new DogES6('Bobik')
 console.dir(dogES6.bark())
